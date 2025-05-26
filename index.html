@@ -6312,5 +6312,20 @@ Expertly navigate the numerous accessory batteries for sale right now with our t
     </script>
 
 
-</div></body>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const fixAttributes = ["src", "href", "srcset"];
+    fixAttributes.forEach(attr => {
+      document.querySelectorAll(`[${attr}]`).forEach(el => {
+        const val = el.getAttribute(attr);
+        if (val && val.startsWith("//")) {
+          el.setAttribute(attr, "https:" + val);
+        }
+      });
+    });
+  });
+</script>
+
+</body>
 </html>
