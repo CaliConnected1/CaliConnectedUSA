@@ -6381,37 +6381,5 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 </script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const base = "https://caliconnected.com";
-
-    // Convert all anchor hrefs
-    document.querySelectorAll("a[href^='/']").forEach(link => {
-      link.href = base + link.getAttribute("href");
-    });
-
-    // Override form actions that post to cart
-    document.querySelectorAll("form[action^='/cart'], form[action^='/products']").forEach(form => {
-      const action = form.getAttribute("action");
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        window.location.href = base + action;
-      });
-    });
-
-    // Handle button clicks that redirect with JS
-    document.querySelectorAll("button").forEach(button => {
-      button.addEventListener("click", function (e) {
-        const parentLink = button.closest("a[href^='/']");
-        if (parentLink) {
-          e.preventDefault();
-          window.location.href = base + parentLink.getAttribute("href");
-        }
-      });
-    });
-  });
-</script>
-
 </body>
 </html>
