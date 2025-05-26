@@ -3,72 +3,79 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>
-    CaliConnected Online Head Shop | Bongs, Dab Rigs, Vapes &amp; More!
-  </title>
+  <title>CaliConnected USA | Bongs, Dab Rigs, Vapes & More</title>
   <link rel="canonical" href="https://caliconnectedusa.com/">
-  <!-- Favicon and touch icon now point directly to the original CaliConnected CDN URLs -->
+
+  <!-- Favicon -->
   <link rel="icon" href="https://caliconnected.com/cdn/shop/files/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="https://caliconnected.com/cdn/shop/files/apple-touch-icon.png">
-  <meta name="description" content="CaliConnected USA is the BEST online head shop for finding your next bong, dab rig, vape, and more! Free US shipping.">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/caliconnected.css">
+  <!-- Shopify theme CSS from CDN -->
+  <link rel="stylesheet" href="https://caliconnected.com/cdn/shop/t/411/assets/main.css?v=171986751195675404661747934877">
+  <link rel="stylesheet" href="https://caliconnected.com/cdn/shop/t/411/assets/animate-on-scroll.css?v=116194678796051782541747934854">
+  <!-- Local styles -->
+  <link rel="stylesheet" href="styles.css">
 
-  <!-- Hide the fourth Shopify app block -->
+  <!-- Shopify theme JS from CDN -->
+  <script defer src="https://caliconnected.com/cdn/shop/t/411/assets/main.js?v=2414140005931730311747934878"></script>
+
+  <!-- Hide the fourth Shopify app block (if included) -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const appBlock = document.getElementsByClassName('shopify-block shopify-app-block')[3];
-      if (appBlock) appBlock.style.display = 'none';
+      const appBlocks = document.getElementsByClassName('shopify-block shopify-app-block');
+      if (appBlocks.length > 3) appBlocks[3].style.display = 'none';
     });
   </script>
 </head>
-<body>
-  <!-- ====== Homepage content starts here ====== -->
+<body class="cc-animate-enabled">
+  <!-- Skip to content -->
+  <a class="skip-link btn btn--primary visually-hidden" href="#main-content">Skip to content</a>
 
   <!-- Hero Banner -->
   <section class="hero-banner">
-    <img
-      src="https://caliconnected.com/cdn/shop/files/Chill-Bong-Mobile-Banner.jpg?v=1714977323&width=1400"
-      alt="Chill Bong Mobile Banner"
-      loading="lazy"
-    />
+    <img src="https://caliconnected.com/cdn/shop/files/Chill-Bong-Mobile-Banner.jpg?v=1714977323&width=1400" alt="Chill Bong Mobile Banner" loading="lazy">
   </section>
 
-  <!-- Categories Section -->
-  <section class="categories">
-    <div class="category-item">
-      <img src="https://caliconnected.com/cdn/shop/files/Bubbler-Pipes.jpg" alt="Bubbler Pipes" loading="lazy" />
-      <p>Bubbler Pipes</p>
-    </div>
-    <div class="category-item">
-      <img src="https://caliconnected.com/cdn/shop/files/eNails-eRigs.jpg" alt="eNails & eRigs" loading="lazy" />
-      <p>eNails & eRigs</p>
-    </div>
-    <div class="category-item">
-      <img src="https://caliconnected.com/cdn/shop/files/Vapes.jpg" alt="Vapes" loading="lazy" />
-      <p>Vapes</p>
-    </div>
-  </section>
-
-  <!-- Featured Products Section -->
-  <section class="featured-products">
-    <div class="product-item">
-      <img src="https://caliconnected.com/cdn/shop/files/Product1.jpg" alt="Product 1" loading="lazy" />
-      <button>Shop Now</button>
-    </div>
-    <div class="product-item">
-      <img src="https://caliconnected.com/cdn/shop/files/Product2.jpg" alt="Product 2" loading="lazy" />
-      <button>Shop Now</button>
-    </div>
-    <div class="product-item">
-      <img src="https://caliconnected.com/cdn/shop/files/Product3.jpg" alt="Product 3" loading="lazy" />
-      <button>Shop Now</button>
+  <!-- Categories -->
+  <section class="section--padded-small">
+    <div class="container grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="text-center">
+        <img src="https://caliconnected.com/cdn/shop/files/Bubbler-Pipes.jpg" alt="Bubbler Pipes" loading="lazy">
+        <h3>Bubbler Pipes</h3>
+      </div>
+      <div class="text-center">
+        <img src="https://caliconnected.com/cdn/shop/files/eNails-eRigs.jpg" alt="eNails & eRigs" loading="lazy">
+        <h3>eNails & eRigs</h3>
+      </div>
+      <div class="text-center">
+        <img src="https://caliconnected.com/cdn/shop/files/Vapes.jpg" alt="Vapes" loading="lazy">
+        <h3>Vapes</h3>
+      </div>
     </div>
   </section>
 
-  <!-- ====== Homepage content ends here ====== -->
+  <!-- Featured Products -->
+  <section class="section--padded-small bg-gray-100">
+    <div class="container grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="product-item">
+        <img src="https://caliconnected.com/cdn/shop/files/Product1.jpg" alt="Product 1" loading="lazy">
+        <button class="btn btn--primary mt-4">Shop Now</button>
+      </div>
+      <div class="product-item">
+        <img src="https://caliconnected.com/cdn/shop/files/Product2.jpg" alt="Product 2" loading="lazy">
+        <button class="btn btn--primary mt-4">Shop Now</button>
+      </div>
+      <div class="product-item">
+        <img src="https://caliconnected.com/cdn/shop/files/Product3.jpg" alt="Product 3" loading="lazy">
+        <button class="btn btn--primary mt-4">Shop Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer note -->
+  <footer class="section--padded-small text-center">
+    <p>&copy; 2025 CaliConnected USA. All rights reserved.</p>
+  </footer>
 
   <!-- Placeholder injection for Facebook-safe rendering -->
   <script>
