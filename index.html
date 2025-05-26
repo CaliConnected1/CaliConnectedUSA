@@ -6349,8 +6349,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  // 1. Replace placeholders in visible text nodes only
+document.addEventListener("DOMContentLoaded", function () {
+  // --- 1. Replace visible text placeholders only ---
   const replacements = {
     "__SAFE_PLACEHOLDER_0__": "Vape",
     "__SAFE_PLACEHOLDER_1__": "Vaporizer",
@@ -6382,28 +6382,36 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 2. Rewrite all internal links to caliconnected.com
+  // --- 2. Force all links/buttons to redirect to caliconnected.com ---
   const base = "https://caliconnected.com";
-  document.querySelectorAll("a[href^='/'], form[action^='/'], button").forEach(el => {
-    if (el.tagName === 'A') {
-      const href = el.getAttribute("href");
-      el.setAttribute("href", base + href);
-    } else if (el.tagName === 'FORM') {
-      el.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const action = el.getAttribute("action");
-        window.location.href = base + action;
-      });
-    } else if (el.tagName === 'BUTTON') {
-      const link = el.closest("a[href^='/']");
-      if (link) {
-        el.addEventListener("click", function (e) {
-          e.preventDefault();
-          window.location.href = base + link.getAttribute("href");
-        });
-      }
-    }
+
+  document.querySelectorAll("a[href^='/']").forEach(link => {
+    const raw = link.getAttribute("href");
+    link.setAttribute("href", base + raw);
   });
+
+  document.querySelectorAll("form[action^='/']").forEach(form => {
+    const action = form.getAttribute("action");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      window.location.href = base + action;
+    });
+  });
+
+  document.querySelectorAll("button, .quick-add-button, .product-form__submit").forEach(btn => {
+    btn.addEventListener("click", function (e) {
+      const link = btn.closest("a[href^='/']");
+      if (link) {
+        e.preventDefault();
+        window.location.href = base + link.getAttribute("href");
+      }
+    });
+  });
+
+  // --- 3. Kill Shopify's theme-specific modals/carts if they exist ---
+  const style = document.createElement('style');
+  style.innerHTML = '.drawer, .modal, .quick-add-overlay { display: none !important; }';
+  document.head.appendChild(style);
 });
 </script>
 
