@@ -6347,41 +6347,39 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const replacements = {
-      "__SAFE_PLACEHOLDER_0__": "Vape",
-      "__SAFE_PLACEHOLDER_1__": "Vaporizer",
-      "__SAFE_PLACEHOLDER_2__": "Dab",
-      "__SAFE_PLACEHOLDER_3__": "Dab Rig",
-      "__SAFE_PLACEHOLDER_4__": "Dab Pen",
-      "__SAFE_PLACEHOLDER_5__": "Weed",
-      "__SAFE_PLACEHOLDER_6__": "Cannabis",
-      "__SAFE_PLACEHOLDER_7__": "Bong",
-      "__SAFE_PLACEHOLDER_8__": "Water Pipe",
-      "__SAFE_PLACEHOLDER_9__": "Enail",
-      "__SAFE_PLACEHOLDER_10__": "Smoke Shop",
-      "__SAFE_PLACEHOLDER_11__": "Head Shop",
-      "__SAFE_PLACEHOLDER_12__": "Bubbler",
-      "__SAFE_PLACEHOLDER_13__": "Banger",
-      "__SAFE_PLACEHOLDER_14__": "Online Headshop",
-      "__SAFE_PLACEHOLDER_15__": "Pipe",
-      "__SAFE_PLACEHOLDER_16__": "Pipes",
-      "__SAFE_PLACEHOLDER_17__": "Bowl",
-      "__SAFE_PLACEHOLDER_18__": "Accessories"
-    };
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
-    let node;
-    while (node = walker.nextNode()) {
-      Object.keys(replacements).forEach(key => {
-        if (node.nodeValue.includes(key)) {
-          node.nodeValue = node.nodeValue.replaceAll(key, replacements[key]);
-        }
-      });
-    }
-  });
+document.addEventListener('DOMContentLoaded', function () {
+  const replacements = {
+    "__SAFE_PLACEHOLDER_0__": "Vape",
+    "__SAFE_PLACEHOLDER_1__": "Vaporizer",
+    "__SAFE_PLACEHOLDER_2__": "Dab",
+    "__SAFE_PLACEHOLDER_3__": "Dab Rig",
+    "__SAFE_PLACEHOLDER_4__": "Dab Pen",
+    "__SAFE_PLACEHOLDER_5__": "Weed",
+    "__SAFE_PLACEHOLDER_6__": "Cannabis",
+    "__SAFE_PLACEHOLDER_7__": "Bong",
+    "__SAFE_PLACEHOLDER_8__": "Water Pipe",
+    "__SAFE_PLACEHOLDER_9__": "Enail",
+    "__SAFE_PLACEHOLDER_10__": "Smoke Shop",
+    "__SAFE_PLACEHOLDER_11__": "Head Shop",
+    "__SAFE_PLACEHOLDER_12__": "Bubbler",
+    "__SAFE_PLACEHOLDER_13__": "Banger",
+    "__SAFE_PLACEHOLDER_14__": "Online Headshop",
+    "__SAFE_PLACEHOLDER_15__": "Pipe",
+    "__SAFE_PLACEHOLDER_16__": "Pipes",
+    "__SAFE_PLACEHOLDER_17__": "Bowl",
+    "__SAFE_PLACEHOLDER_18__": "Accessorys"
+  };
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+  let node;
+  while (node = walker.nextNode()) {
+    Object.keys(replacements).forEach(key => {
+      if (node.nodeValue.includes(key)) {
+        node.nodeValue = node.nodeValue.replaceAll(key, replacements[key]);
+      }
+    });
+  }
+});
 </script>
-
 </body>
 </html>
