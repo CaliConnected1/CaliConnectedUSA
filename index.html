@@ -6372,38 +6372,103 @@ document.addEventListener('DOMContentLoaded', function () {
     "__SAFE_PLACEHOLDER_17__": "Bowl",
     "__SAFE_PLACEHOLDER_18__": "Accessorys"
   };
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
-  let node;
-  while (node = walker.nextNode()) {
-    Object.keys(replacements).forEach(key => {
-      if (node.nodeValue.includes(key)) {
-        node.nodeValue = node.nodeValue.replaceAll(key, replacements[key]);
+
+  // Function to replace text in all text nodes
+  function replaceTextInNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      let text = node.nodeValue;
+      let hasReplacement = false;
+      
+      Object.keys(replacements).forEach(key => {
+        if (text.includes(key)) {
+          text = text.replaceAll(key, replacements[key]);
+          hasReplacement = true;
+        }
+      });
+      
+      if (hasReplacement) {
+        node.nodeValue = text;
+      }
+    } else {
+      // Recursively process child nodes
+      for (let i = 0; i < node.childNodes.length; i++) {
+        replaceTextInNode(node.childNodes[i]);
+      }
+    }
+  }
+
+  // Also replace in attributes (like href, src, etc.)
+  function replaceInAttributes() {
+    // Find all elements that contain placeholders in any attribute
+    const allElements = document.querySelectorAll('*');
+    
+    allElements.forEach(el => {
+      // Get all attributes of the element
+      const attributes = el.attributes;
+      
+      for (let i = 0; i < attributes.length; i++) {
+        const attr = attributes[i];
+        const value = attr.value;
+        
+        // Check if this attribute contains any placeholder
+        let hasPlaceholder = false;
+        Object.keys(replacements).forEach(key => {
+          if (value.includes(key)) {
+            hasPlaceholder = true;
+          }
+        });
+        
+        if (hasPlaceholder) {
+          let newValue = value;
+          Object.keys(replacements).forEach(key => {
+            newValue = newValue.replaceAll(key, replacements[key]);
+          });
+          el.setAttribute(attr.name, newValue);
+        }
       }
     });
   }
 
+  // Execute replacements
+  replaceTextInNode(document.body);
+  replaceInAttributes();
+
   // 2. Rewrite all internal links to caliconnected.com
   const base = "https://caliconnected.com";
-  document.querySelectorAll("a[href^='/'], form[action^='/'], button").forEach(el => {
-    if (el.tagName === 'A') {
-      const href = el.getAttribute("href");
-      el.setAttribute("href", base + href);
-    } else if (el.tagName === 'FORM') {
-      el.addEventListener("submit", function (e) {
+  
+  // Handle links
+  document.querySelectorAll("a[href^='/']").forEach(el => {
+    const href = el.getAttribute("href");
+    el.setAttribute("href", base + href);
+  });
+  
+  // Handle forms
+  document.querySelectorAll("form[action^='/']").forEach(el => {
+    const originalAction = el.getAttribute("action");
+    el.addEventListener("submit", function (e) {
+      e.preventDefault();
+      window.location.href = base + originalAction;
+    });
+  });
+  
+  // Handle buttons that are inside links
+  document.querySelectorAll("button").forEach(el => {
+    const link = el.closest("a[href^='/']");
+    if (link) {
+      el.addEventListener("click", function (e) {
         e.preventDefault();
-        const action = el.getAttribute("action");
-        window.location.href = base + action;
+        e.stopPropagation();
+        const href = link.getAttribute("href");
+        window.location.href = base + href;
       });
-    } else if (el.tagName === 'BUTTON') {
-      const link = el.closest("a[href^='/']");
-      if (link) {
-        el.addEventListener("click", function (e) {
-          e.preventDefault();
-          window.location.href = base + link.getAttribute("href");
-        });
-      }
     }
   });
+
+  // Optional: Add a small delay and run again to catch any dynamically loaded content
+  setTimeout(() => {
+    replaceTextInNode(document.body);
+    replaceInAttributes();
+  }, 100);
 });
 </script>
 
